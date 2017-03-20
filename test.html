@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+ <title>Compiler</title>
+ <meta charset="utf-8" />
+ <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+ <link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lobster" />
+ <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+
+ <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jqueryui.min.js"></script>
+
+
+ <script>
+
+
+ $(function() {
+
+ var height=$( window ).height()-40;
+
+ $(".codecontainer").css("height",height+"px");
+ $(".selector").click(function() {
+
+ $( this ).toggleClass( "selected" );
+
+ 	 	 var id=$(this).attr("name");
+
+ 	 	 $("#"+id+"Container").toggle();
+
+ 	 	 var number = $('.codecontainer').filter(function() {
+ return $(this).css('display') !== 'none';
+}).length;
+	 	 var width=100/number;
+
+	 	 $(".codecontainer").css("width",width+"%");
+
+ });
+
+
+ $("#run").click(function() {
+
+
+ 	 	 $('#resultFrame').contents().find('html').html("<style>"+$
+('#css').val()+"</style>"+$("#html").val());
+
+ document.getElementById('resultFrame').contentWindow.eval( $
+('#js').val() );
+ });
+
+
+ });
+ </script>
+</head>
+<body>
+<div id="container">
+<div id="titlebar">
+<div id="title">
+	 	 Lokesh's Compiler
+</div>
+
+<div id="runButton">
+
+	 	 <button id="run">Run</button>
+
+</div>
+
+<div >
+	 	 <ul id="menu">
+			 <li class="selector selected" name="html">HTML</li>
+			 <li class="selector" name="css">CSS</li>
+			 <li class="selector" name="js">JS</li>
+			 <li class="selector selected" name="result" style="border:none">Result</li>
+	 	 </ul>
+</div>
+
+
+
+</div>
+
+<div class="break"></div>
+
+<div class="codecontainer" id="htmlContainer">
+	 	 <span class="containerTitle">HTML</span>
+	 	 <textarea class="code" id="html">
+<div id="test">LokeshReddy Pothapu</div>
+	 	 </textarea>
+
+</div>
+
+<div class="codecontainer" id="cssContainer">
+	 	 <span class="containerTitle">CSS</span>
+	 	 <textarea class="code" id="css">
+#test {
+background:green;
+}
+	 	 </textarea>
+</div>
+
+<div class="codecontainer" id="jsContainer">
+	 	 <span class="containerTitle">JS</span>
+	 	 <textarea class="code" id="js">
+alert("LokeshReddy Pothapu");
+	 	 </textarea>
+</div>
+<div class="codecontainer" id="resultContainer">
+	 	 <span class="containerTitle">Result</span>
+	 	 <div class="resultContainer">
+	 	 <iframe id="resultFrame"></iframe>
+	 	 </div>
+</div>
+</div>
+</body>
+</html>
